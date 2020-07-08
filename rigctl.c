@@ -668,6 +668,10 @@ g_print("%s: accept connection\n",__FUNCTION__);
       continue;
     }
 
+#ifdef __APPLE__
+#define SOL_TCP IPPROTO_TCP
+#endif
+
     if(setsockopt(rigctl->socket_fd, SOL_TCP, TCP_NODELAY, (void *)&on, sizeof(on))<0) {
       perror("TCP_NODELAY");
     }
